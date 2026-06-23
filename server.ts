@@ -1698,7 +1698,7 @@ Expected JSON format:
     const result = JSON.parse(text);
     return res.json(result);
   } catch (error: any) {
-    console.error("Gemini scamcheck analysis failed, activating fallback:", error?.message || error);
+    console.warn("Gemini scamcheck analysis failed, activating fallback:", error?.message || error);
     const dynamicFallback = generateDynamicOfflineScamCheck(flagsArray, scamText);
     return res.json(dynamicFallback);
   }
@@ -1867,7 +1867,7 @@ JSON 格式要求：
     const result = JSON.parse(text);
     return res.json(result);
   } catch (error: any) {
-    console.error("Gemini check-price failed, falling back gracefully:", error?.message || error);
+    console.warn("Gemini check-price failed, falling back gracefully:", error?.message || error);
     const dynamicCheckPrice = generateDynamicOfflineCheckPrice(title, price, description);
     return res.json(dynamicCheckPrice);
   }
@@ -1937,7 +1937,7 @@ ${JSON.stringify(companions)}
     const result = JSON.parse(text);
     return res.json(result);
   } catch (error: any) {
-    console.error("Gemini match-companion failed, fallback active:", error?.message || error);
+    console.warn("Gemini match-companion failed, fallback active:", error?.message || error);
     const dynamicCompanion = generateDynamicOfflineMatchCompanion(description, companions);
     return res.json(dynamicCompanion);
   }
@@ -2226,7 +2226,7 @@ app.post("/api/budget-recipe", upload.single("image"), async (req, res) => {
     const result = JSON.parse(text);
     return res.json(result);
   } catch (error: any) {
-    console.error("Gemini budget-recipe failed, fallback active:", error?.message || error);
+    console.warn("Gemini budget-recipe failed, fallback active:", error?.message || error);
     const dynamicBudgetRecipe = generateDynamicOfflineBudgetRecipe(originalname);
     return res.json(dynamicBudgetRecipe);
   }
@@ -2285,7 +2285,7 @@ app.post("/api/generate-emergency-guide", async (req, res) => {
     return res.json(result);
 
   } catch (error: any) {
-    console.error("Gemini emergency assist generator failed, returning smart offline fallback:", error?.message || error);
+    console.warn("Gemini emergency assist generator failed, returning smart offline fallback:", error?.message || error);
     // Smart Regex Offline Fallback
     const s = req.body.scenario ? req.body.scenario.toLowerCase() : "";
     let fallback = {

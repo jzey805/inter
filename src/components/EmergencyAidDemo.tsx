@@ -236,7 +236,7 @@ export default function EmergencyAidDemo() {
         throw new Error(data.error || "Generation error");
       }
     } catch (err) {
-      console.error("Failed to generate emergency guide, applying fallback:", err);
+      console.warn("Failed to generate emergency guide, applying fallback:", err);
       // Fallback matching client-side
       const s = scenarioText.toLowerCase();
       let fallback = {
@@ -322,7 +322,7 @@ export default function EmergencyAidDemo() {
           utterance.onstart = () => setTtsPlaying(true);
           utterance.onend = () => setTtsPlaying(false);
           utterance.onerror = (e) => {
-            console.error("SpeechSynthesis utterance error:", e);
+            console.warn("SpeechSynthesis utterance error:", e);
             setTtsPlaying(false);
           };
           window.speechSynthesis.speak(utterance);
@@ -346,7 +346,7 @@ export default function EmergencyAidDemo() {
         console.warn("Speech synthesis not supported in this browser or environment.");
       }
     } catch (err) {
-      console.error("Speech synthesis failed or was blocked by sandbox permissions:", err);
+      console.warn("Speech synthesis failed or was blocked by sandbox permissions:", err);
       setTtsPlaying(false);
     }
   };
@@ -369,7 +369,7 @@ export default function EmergencyAidDemo() {
         };
         
         recognition.onerror = (event: any) => {
-          console.error("Speech recognition error", event.error);
+          console.warn("Speech recognition error", event.error);
           setIsListening(false);
           if (event.error === 'not-allowed') {
             alert('获取麦克风权限失败，请确保浏览器已允许访问麦克风。正在使用模拟数据进行演示...');
